@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1554131764 source:c:\users\alumno\desktop\clase 5\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Numeros.h"
+
+1554130910 source:c:\users\alumno\desktop\clase 5\numeros.c
+	"Numeros.h"
+
+1554129946 c:\users\alumno\desktop\clase 5\numeros.h
+
