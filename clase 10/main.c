@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include "Empleado.h"
-
+#include "string.h"
 #define T 10
 
 
@@ -22,43 +22,42 @@ int main()
 
     eEmpleado lista[T];
     inicializarEmpleados(lista,T);
+    eSector sectores[3];
 
-    eSector sectores[3] = {{1,"Contabilidad",100},{2,"Sistemas",200},{3, "RRHH", 150}};
+    hardcodearDatosEmpleados(lista,6);
+    hardcodearSectores(sectores,3);
 
-
-
-
-hardcodearDatosEmpleados(lista,6);
     do
     {
         opcion = menuDeOpciones("1.Alta\n2.Baja\n3.Modificar\n4.Mostrar\n5.Informar\n10.Salir\nElija una opcion: ");
         switch(opcion)
         {
-            case 1:
-                cargarEmpleado(lista,  T);
+        case 1:
+            cargarEmpleado(lista, sectores,  T, 3);
 
             break;
-            case 2:
-                borrarEmpleado(lista, T, 3);
-                break;
-            case 3:
+        case 2:
+            borrarEmpleado(lista, T, 3);
+            break;
+        case 3:
 
-                modificar(lista, T, 3);
+            modificar(lista, T, 3);
             break;
 
-            case 4:
-                mostrarListaEmpleados(lista, T, sectores, 3);
-                break;
-            case 5:
+        case 4:
+            mostrarListaEmpleados(lista, T, sectores, 3);
+            break;
+        case 5:
 
-                mostrarEmpleadosSueldoMaximo(lista,T);
-                printf("La cantidad de carlos es: %d\n", contarCarlos(lista,T));
+            mostrarEmpleadosSueldoMaximo(lista,T);
+            printf("La cantidad de carlos es: %d\n", contarCarlos(lista,T));
 
-                break;
+            break;
 
 
         }
-    }while(opcion!=10);
+    }
+    while(opcion!=10);
 
 
 

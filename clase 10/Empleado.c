@@ -1,12 +1,14 @@
-
+#include "string.h"
 #include "Empleado.h"
 
 
-void cargarEmpleado(eEmpleado lista[], int tam)
+void cargarEmpleado(eEmpleado lista[],eSector sectores[], int tam, int ts)
 {
     int i;
-
+    int j;
+    float valorHoraSector;
     i = buscarLibre(lista, tam);
+
     if(i!=-1)
     {
         printf("Ingrese legajo: ");
@@ -17,14 +19,26 @@ void cargarEmpleado(eEmpleado lista[], int tam)
         printf("Ingrese sexo: ");
         fflush(stdin);
         scanf("%c", &lista[i].sexo);
-        printf("Ingrese sueldo bruto: ");
-        scanf("%f", &lista[i].sueldoBruto);
+        printf("Ingrese sector: ");
+        mostrarSectores(sectores,3);
+        scanf("%d",&lista[i].idSector);
 
-        lista[i].sueldoNeto =lista[i].sueldoBruto*0.85;
+        printf("Ingrese horas realizadas: ");
+        scanf("%d",&lista[i].cantidadHoras);
+
+        for (j=0; j<ts; j++)
+        {
+            valorHoraSector=sectores[i].valor;
+        }
+
+        lista[i].sueldoBruto=(float)lista[i].cantidadHoras*valorHoraSector;
+        lista[i].sueldoNeto=lista[i].sueldoBruto*0.85;
+
+        printf("%f-%f\n",lista[i].sueldoBruto,lista[i].sueldoNeto);
 
         lista[i].estado = OCUPADO;
-
     }
+
     else
     {
         printf("No hay espacio");
@@ -33,7 +47,6 @@ void cargarEmpleado(eEmpleado lista[], int tam)
 
 
 }
-
 void mostrarListaEmpleados(eEmpleado lista[], int tam, eSector sectores[], int ts)
 {
     int i;
@@ -101,8 +114,6 @@ void hardcodearDatosEmpleados(eEmpleado lista[], int tam)
     float sueldosBruto[]= {22000,22000,15000,4000,21000,6000};
     int sector[]={1,2,3,1,2,2};
 
-    eFecha unaFecha = {22,04,2019};
-
     for(i=0; i<tam; i++)
     {
         lista[i].legajo = legajos[i];
@@ -112,9 +123,6 @@ void hardcodearDatosEmpleados(eEmpleado lista[], int tam)
         lista[i].sueldoNeto = sueldosBruto[i] * 0.85;
         lista[i].estado = OCUPADO;
         lista[i].idSector = sector[i];
-
-
-
     }
 
 
@@ -248,11 +256,32 @@ int contarCarlos(eEmpleado lista[], int tam)
     return contadorCarlos;
 }
 
-
-
 int buscarLegajo(eEmpleado lista[], int tam, int legajo)
 {
 
 }
 
+void mostrarSectores(eSector sectores[], int ts)
+{
+int i;
+for(i=0;i<ts;i++)
+    {
+        printf("%d.\t%s\n",sectores[i].idSector,sectores[i].descripcion);
+    }
+};
 
+void hardcodearSectores(eSector sectores[],int tam)
+{
+    int i;
+    int idSectores[]={1,2,3};
+    char descripcionSectores[][20]={"Contabilidad","Sistemas","RRHH"};
+    float valorSectores[]={100,200,150};
+
+
+    for(i=0; i<tam; i++)
+    {
+        sectores[i].idSector=idSectores[i];
+        strcpy(sectores[i].descripcion,descripcionSectores[i]);
+        sectores[i].valor=valorSectores[i];
+    }
+};
