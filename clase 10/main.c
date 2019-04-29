@@ -16,8 +16,6 @@ Informes:
 
 int main()
 {
-
-    int indice;
     int opcion;
 
     eEmpleado lista[T];
@@ -27,33 +25,36 @@ int main()
     hardcodearDatosEmpleados(lista,6);
     hardcodearSectores(sectores,3);
 
+
     do
     {
-        opcion = menuDeOpciones("1.Alta\n2.Baja\n3.Modificar\n4.Mostrar\n5.Informar\n10.Salir\nElija una opcion: ");
+        opcion = menuDeOpciones("1.Alta\n2.Baja\n3.Modificar\n4.Mostrar\n5.Informar\n6.Sector con mas empleados.\n10.Salir\nElija una opcion: ");
         switch(opcion)
         {
         case 1:
             cargarEmpleado(lista, sectores,  T, 3);
-
             break;
+
         case 2:
             borrarEmpleado(lista, T, 3);
             break;
-        case 3:
 
+        case 3:
             modificar(lista, T, 3);
             break;
 
         case 4:
             mostrarListaEmpleados(lista, T, sectores, 3);
             break;
-        case 5:
 
+        case 5:
             mostrarEmpleadosSueldoMaximo(lista,T);
             printf("La cantidad de carlos es: %d\n", contarCarlos(lista,T));
-
             break;
 
+        case 6:
+            buscarSectorConMasEmpleados(sectores,3,lista,T);
+            break;
 
         }
     }

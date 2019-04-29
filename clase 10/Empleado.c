@@ -19,7 +19,7 @@ void cargarEmpleado(eEmpleado lista[],eSector sectores[], int tam, int ts)
         printf("Ingrese sexo: ");
         fflush(stdin);
         scanf("%c", &lista[i].sexo);
-        printf("Ingrese sector: ");
+        printf("Ingrese sector:\n ");
         mostrarSectores(sectores,3);
         scanf("%d",&lista[i].idSector);
 
@@ -28,7 +28,11 @@ void cargarEmpleado(eEmpleado lista[],eSector sectores[], int tam, int ts)
 
         for (j=0; j<ts; j++)
         {
-            valorHoraSector=sectores[i].valor;
+            if(lista[i].idSector==sectores[j].idSector)
+            {
+                valorHoraSector=sectores[j].valor;
+                break;
+            }
         }
 
         lista[i].sueldoBruto=(float)lista[i].cantidadHoras*valorHoraSector;
@@ -285,3 +289,47 @@ void hardcodearSectores(eSector sectores[],int tam)
         sectores[i].valor=valorSectores[i];
     }
 };
+
+void buscarSectorConMasEmpleados(eSector sectores[], int ts, eEmpleado empleados[],int te)
+{
+    eAuxiliar aux[ts];
+
+    int i;
+    int j;
+    int flag=0;
+    int maximo=0;
+
+    for(i=0; i<ts; i++)
+    {
+        aux[i].idSector=sectores[i].idSector;
+        strcpy(aux[i].descripcion,sectores[i].descripcion);
+        aux[i].contador=0;
+    }
+
+    for(i=0; i<ts; i++)
+    {
+        for(j=0; j<te; j++)
+        {
+            if(aux[i].idSector==empleados[j].idSector)
+            {
+                aux[i].contador++;
+            }
+        }
+    }
+    for(i=0;i<ts;i++)
+        {
+        if(flag==0||aux[i].contador>maximo)
+            {
+                maximo=aux[i].contador;
+                flag=1;
+            }
+        }
+
+    for(i=0;i<ts;i++)
+        {
+            if(aux[i].contador==maximo)
+                {
+                    printf("Sector %s\n",aux[i].descripcion);
+                }
+        }
+}
