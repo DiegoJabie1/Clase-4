@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1558375893 source:c:\users\alumno\desktop\punteros\abm numeros y punteros\abm numeros\main.c
+	<stdio.h>
+	<stdlib.h>
+
